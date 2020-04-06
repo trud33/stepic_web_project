@@ -1,5 +1,0 @@
-django==1.6.1
-mysqlclient
-gunicorn
-flake8
-autopep8

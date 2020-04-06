@@ -1,14 +1,7 @@
-# Project files
-.idea
-env
+secret.txt
 
-# Debug files
-*debug*
+__pycache__/
+.idea/
 
-# Local config
-*_local*
-
-# Temporary files
-*.pyc
-__pycache__
-*.log
+*.py[cod]
+*.sqlite3

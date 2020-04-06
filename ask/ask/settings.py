@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+# use pymysql instead of mysql-python
+import pymysql
+pymysql.install_as_MySQLdb() 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'r817^a02d*k(r%tn0i#(-zp+npyll36n0q$9y356+jo89%79@c'
+SECRET_KEY = 'e3c4#f4ue5+p)*)i0ye@3y@fd+#4(xvhk*8$pi_4i0w8a8$9$p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'qa',
+    'qa.apps.QaConfig', #https://docs.djangoproject.com/en/1.9/intro/tutorial02/
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -75,24 +79,19 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-if os.name == "nt":
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+DATABASES = {
+    'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django',
+        'USER': 'root',
+        # export DB_PASSWORD=your_passwd
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        #'HOST': '127.0.0.1',
+        #'PORT': '3306',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'djbase',
-            'USER': 'django',
-            'PASSWORD': 'pass123',
-            'HOST': '127.0.0.1',
-            'PORT': '3306',
-        }
-    }
+}
 
 
 # Password validation
